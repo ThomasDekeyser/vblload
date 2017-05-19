@@ -62,10 +62,9 @@ public class TeamProcessor extends FileProcessor {
                 .map(m -> {
                     String teamName = m.get("name");
                     String drawName = m.get("DrawName");
-                    String[] teamNameSplitted = teamName.split(" ");
-                    String teamNameLastPart = teamNameSplitted[teamNameSplitted.length-1];
 
-                    m.put("XXsequenceNumber",teamNameLastPart.substring(0,teamNameLastPart.length()-1));
+
+                    m.put("XXsequenceNumber",teamNameToSequenceNumber(teamName));
                     m.put("XXevent",GroupProcessor.teamNameToEventCode(teamName));
                     m.put("XXdevision",GroupProcessor.drawNameToDevision(drawName));
                     m.put("XXseries",GroupProcessor.drawNameToSeries(drawName));
@@ -89,6 +88,13 @@ public class TeamProcessor extends FileProcessor {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public static String teamNameToSequenceNumber(String teamName) {
+        String[] teamNameSplitted = teamName.split(" ");
+        String teamNameLastPart = teamNameSplitted[teamNameSplitted.length-1];
+
+        return teamNameLastPart.substring(0,teamNameLastPart.length()-1);
     }
 
 

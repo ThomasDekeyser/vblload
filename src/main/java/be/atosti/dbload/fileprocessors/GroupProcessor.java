@@ -65,12 +65,12 @@ public class GroupProcessor extends FileProcessor {
         return resultList.stream();
     }
 
-    static String teamNameToEventCode(String teamName) {
+    public static String teamNameToEventCode(String teamName) {
         String result = "??";
         if (teamName.endsWith("G")) {
             result="MX";
         }else if (teamName.endsWith("H")) {
-            result="H";
+            result="M";
         }else if (teamName.endsWith("D")) {
             result = "L";
         }

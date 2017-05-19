@@ -1,12 +1,7 @@
 package be.atosti.dbload;
 
 import java.io.*;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.stream.Stream;
 
 /**
@@ -16,6 +11,7 @@ public class CsvReader {
 
     private static final String SEPARATOR = ";";
     public static final String UTF8_BOM = "\uFEFF";
+    private static final String START_END_QUOTE = "\"";
 
 
     public Stream<HashMap<String,String>> readRecords(BufferedReader reader ) {
@@ -32,7 +28,7 @@ public class CsvReader {
                         HashMap<String,String> r = new HashMap<>();
                         //System.out.println("Processing line"+Arrays.asList(line));
                         for (int i=0;i<headers.length;i++){
-                            r.put(headers[i],line[i]);
+                            r.put(headers[i],line[i].startsWith(START_END_QUOTE) && line[i].endsWith(START_END_QUOTE) ? line[i].substring(1,line[i].length()-1) : line[i]);
                         }
                         return r;
                     });
