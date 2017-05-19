@@ -42,7 +42,7 @@ public class LigaTeamProcessor extends FileProcessor {
                 ));
     }
 
-    static boolean containsValidHeaders(HashMap<String, String> r) {
+    public static boolean containsValidHeaders(HashMap<String, String> r) {
         return r.containsKey("player_playerId")
                 && r.containsKey("team_teamName")
                 && r.containsKey("club_clubName");
